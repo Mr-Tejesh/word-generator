@@ -1,8 +1,12 @@
 // Make the API request
-var randomWord;
 // Make the API request
 
 document.querySelector("#start").addEventListener("click", function () {
+  generateAndChangeWord();
+  setInterval(generateAndChangeWord, 20000);
+});
+
+function generateNewWord() {
   fetch("https://random-word-api.herokuapp.com/word")
     .then((response) => response.json())
     .then((data) => {
@@ -17,4 +21,14 @@ document.querySelector("#start").addEventListener("click", function () {
       // Handle any errors that occurred during the API request
       console.error("Error:", error);
     });
-});
+}
+
+function generateAndChangeWord() {
+  generateNewWord();
+  setTimeout(newWord, 15000);
+  setTimeout(() => {}, 5000);
+}
+
+function newWord() {
+  document.querySelector(".words").textContent = "Word on wayy!!!";
+}
